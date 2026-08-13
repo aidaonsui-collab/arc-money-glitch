@@ -18,10 +18,6 @@ export function Footer() {
             />
             <span className="font-brand text-sm tracking-[0.28em]">AMG</span>
           </div>
-          <p className="mt-3 max-w-xs text-sm text-muted">
-            Arc Money Glitch ($AMG). Reflection token on Arc. USDC rewards to
-            holders. Launching on arcfun.co.
-          </p>
         </div>
         <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted">
           <Link to="/rewards" className="hover:text-fg">
