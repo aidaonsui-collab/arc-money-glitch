@@ -3,7 +3,6 @@ import { formatUsdc } from "@/lib/format";
 
 export function RewardsCounter() {
   const { data, loading } = useGlobalRewards();
-  const launched = data?.launched ?? false;
   const total = data?.totalUsdcDistributed ?? 0;
   const display = loading && !data ? null : formatUsdc(total);
 
@@ -17,11 +16,6 @@ export function RewardsCounter() {
         <span className="font-sans text-sm font-medium tracking-normal text-muted sm:text-base">
           USDC
         </span>
-      </p>
-      <p className="mt-3 font-mono text-[0.65rem] tracking-[0.16em] text-faint uppercase">
-        {launched
-          ? "Paid to all $AMG holders on Arc"
-          : "Launching on arcfun.co — counter goes live with the contract"}
       </p>
     </div>
   );

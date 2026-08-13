@@ -23,7 +23,7 @@ export function Hero() {
         <h1 className="max-w-3xl font-display text-[clamp(2rem,6vw,3.75rem)] leading-[1.05] font-semibold tracking-tight">
           The glitch in the dollar machine.
         </h1>
-        <p className="mt-4 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
+        <p className="mt-4 max-w-xl font-mono text-[0.8rem] font-medium leading-relaxed tracking-[0.14em] text-fg uppercase sm:text-sm">
           $AMG is a reflection token on Arc. Every swap leaks USDC to holders.
           Hold the bag. Get paid.
         </p>
