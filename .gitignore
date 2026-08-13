@@ -1,0 +1,25 @@
+node_modules
+dist
+.output
+.vercel
+.nitro
+.tanstack
+*.log
+.env
+.env.*
+!.env.example
+.DS_Store
+tsconfig.tsbuildinfo
+.idea
+.vscode
+coverage
+playwright-report
+test-results
+
+# Grok builder internals (not the app)
+.grok
+artifacts
+attachments
+screenshots
+.node_modules.lock
+AGENTS.md
