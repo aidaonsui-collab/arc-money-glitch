@@ -24,7 +24,7 @@ export function SiteNav() {
           : "bg-transparent",
       )}
     >
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-2 px-4 pt-[env(safe-area-inset-top)] sm:gap-3 sm:px-6">
         <Link to="/" className="flex items-center gap-2.5" aria-label="AMG home">
           <img
             src="/images/amg-mark.png"
