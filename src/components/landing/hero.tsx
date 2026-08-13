@@ -20,7 +20,7 @@ export function Hero() {
         <p className="hero-copy mb-3 font-mono text-[0.7rem] tracking-[0.34em] text-primary uppercase">
           Arc Money Glitch · $AMG
         </p>
-        <h1 className="hero-title max-w-3xl font-display text-[clamp(1.75rem,8.4vw,3.75rem)] leading-[1.05] font-semibold tracking-tight">
+        <h1 className="hero-title max-w-3xl font-display text-[clamp(2rem,6vw,3.75rem)] leading-[1.05] font-semibold tracking-tight">
           The glitch in the dollar machine.
         </h1>
         <p className="hero-copy mt-4 max-w-xl font-mono text-[0.8rem] font-medium leading-relaxed tracking-[0.14em] uppercase sm:text-sm">
