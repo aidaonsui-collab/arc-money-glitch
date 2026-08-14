@@ -24,9 +24,9 @@ export function Hero() {
         <h1 className="hero-title max-w-3xl font-display text-[clamp(2rem,6vw,3.75rem)] leading-[1.05] font-semibold tracking-tight">
           The glitch in the dollar machine.
         </h1>
-        <p className="hero-blurb mt-4 max-w-xl font-mono text-sm font-semibold leading-relaxed tracking-[0.12em] uppercase sm:text-[0.95rem]">
-          $AMG is a reflection token on Arc. Every swap leaks USDC to holders.
-          Hold the bag. Get paid.
+        <p className="hero-blurb mt-4 max-w-2xl font-mono text-sm font-semibold leading-relaxed tracking-[0.12em] uppercase sm:text-[0.95rem]">
+          $AMG IS THE FIRST USDC REWARDS SYSTEM ON ARC. EVERY SWAP LEAKS USDC TO
+          HOLDERS. HOLD THE BAG. GET PAID.
         </p>
 
         <div className="mt-8 flex w-full max-w-md flex-col items-center gap-3 sm:max-w-none sm:flex-row sm:justify-center">
