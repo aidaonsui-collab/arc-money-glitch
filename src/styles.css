@@ -121,6 +121,15 @@
     paint-order: stroke fill;
   }
 
+  .hero-blurb {
+    color: var(--color-fg);
+    -webkit-text-stroke: 0.07em var(--color-bg);
+    paint-order: stroke fill;
+    text-shadow:
+      0 1px 0 rgb(5 6 10 / 0.85),
+      0 0 6px rgb(5 6 10 / 0.75);
+  }
+
   .scanlines {
     background-image: repeating-linear-gradient(
       to bottom,
