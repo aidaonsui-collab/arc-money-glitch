@@ -127,9 +127,8 @@ function RewardsPage() {
                       Live on Arc
                     </h2>
                     <p className="mt-1 text-sm text-muted">
-                      Numbers come from the Instant Reflection contract. USDC
-                      is pushed to holders automatically; claim is a backup
-                      pull.
+                      USDC is pushed to holders automatically every 15 minutes;
+                      claim is a backup pull.
                     </p>
                     <dl className="mt-6 space-y-3 text-sm">
                       <Row
