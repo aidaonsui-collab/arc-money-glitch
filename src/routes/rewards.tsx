@@ -9,6 +9,7 @@ import { ConnectButton } from "@/components/wallet/connect-button";
 import { claimAmgRewards } from "@/lib/claim";
 import { formatToken, formatUsdc } from "@/lib/format";
 import { useWalletRewards } from "@/lib/use-rewards";
+import { amgBuyUrl, getAmgToken } from "@/lib/amg";
 import { isArcChain, explorerAddressUrl } from "@/lib/arc";
 import {
   chainLabel,
@@ -29,7 +30,8 @@ function RewardsPage() {
   const [switching, setSwitching] = useState(false);
 
   const onArc = isArcChain(chainId);
-  const launched = data?.launched ?? false;
+  const token = data?.token ?? getAmgToken();
+  const buyUrl = data?.buyUrl ?? amgBuyUrl();
   const claimable = data?.claimableUsdc ?? 0;
 
   return (
@@ -110,7 +112,7 @@ function RewardsPage() {
                   <Stat
                     label="$AMG held"
                     value={formatToken(data?.amgHeld ?? 0)}
-                    hint={launched ? "On-chain balance" : "Contract not live yet"}
+                    hint="On-chain balance"
                   />
                   <Stat
                     label="Total USDC distributed to you"
@@ -122,12 +124,12 @@ function RewardsPage() {
                 <div className="mt-3 grid gap-3 lg:grid-cols-[1.2fr_0.8fr]">
                   <section className="rounded-xl bg-surface p-6 shadow-[var(--shadow-border)]">
                     <h2 className="font-display text-lg font-semibold">
-                      {launched ? "Live on Arc" : "Pre-launch"}
+                      Live on Arc
                     </h2>
                     <p className="mt-1 text-sm text-muted">
-                      {launched
-                        ? "Numbers come from the Instant Reflection contract on Arc. The arcfun keeper pushes USDC to holders automatically."
-                        : "$AMG has not launched yet. The contract address will be wired after the Instant Reflection create on arcfun.co. Your wallet stays connected — bag and rewards appear the second it goes live."}
+                      Numbers come from the Instant Reflection contract. USDC
+                      is pushed to holders automatically; claim is a backup
+                      pull.
                     </p>
                     <dl className="mt-6 space-y-3 text-sm">
                       <Row
@@ -139,23 +141,21 @@ function RewardsPage() {
                         v={`$${formatUsdc(claimable)}`}
                       />
                       <Row k="Network" v="Arc · 5042" />
-                      {data?.token ? (
+                      {token ? (
                         <Row
                           k="Contract"
                           v={
                             <a
                               className="text-primary hover:underline"
-                              href={explorerAddressUrl(data.token)}
+                              href={explorerAddressUrl(token)}
                               target="_blank"
                               rel="noreferrer"
                             >
-                              {shortenAddress(data.token)}
+                              {shortenAddress(token)}
                             </a>
                           }
                         />
-                      ) : (
-                        <Row k="Contract" v="Pending launch" />
-                      )}
+                      ) : null}
                     </dl>
                     {error ? (
                       <p className="mt-4 text-sm text-muted" role="alert">
@@ -176,13 +176,13 @@ function RewardsPage() {
                     <p className="mt-1 text-xs text-faint">Available now</p>
                     <Button
                       className="mt-auto min-h-12"
-                      disabled={!launched || !data?.token || claimable <= 0 || claiming}
+                      disabled={!token || claimable <= 0 || claiming}
                       onClick={async () => {
-                        if (!data?.token) return;
+                        if (!token) return;
                         setClaiming(true);
                         try {
                           if (!onArc) await switchToArc();
-                          const hash = await claimAmgRewards(data.token, address);
+                          const hash = await claimAmgRewards(token, address);
                           toast.success(`Claim submitted ${hash.slice(0, 10)}…`);
                         } catch (err) {
                           toast.error(
@@ -193,17 +193,15 @@ function RewardsPage() {
                         }
                       }}
                     >
-                      {!launched
-                        ? "Waiting on launch"
-                        : claimable <= 0
-                          ? "Nothing to claim"
-                          : claiming
-                            ? "Claiming…"
-                            : "Claim USDC"}
+                      {claimable <= 0
+                        ? "Nothing to claim"
+                        : claiming
+                          ? "Claiming…"
+                          : "Claim USDC"}
                     </Button>
                     <div className="mt-3 flex flex-col gap-1">
                       <a
-                        href={data?.buyUrl ?? "https://arcfun.co"}
+                        href={buyUrl}
                         target="_blank"
                         rel="noreferrer"
                         className="min-h-10 text-center text-sm text-muted hover:text-fg"

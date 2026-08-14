@@ -20,7 +20,7 @@ export const Route = createRootRoute({
       {
         name: "description",
         content:
-          "AMG is Arc Money Glitch — a reflection token on Arc. Hold $AMG, earn USDC. Launching on arcfun.co.",
+          "AMG is Arc Money Glitch — the first USDC rewards system on Arc. Hold $AMG, earn USDC.",
       },
       { name: "apple-mobile-web-app-title", content: "AMG" },
       { name: "theme-color", content: "#05060a" },

@@ -31,9 +31,10 @@ function toHuman(raw: bigint, decimals: number): number {
 }
 
 function emptyGlobal(source: GlobalRewards["source"], error?: string): GlobalRewards {
+  const token = getAmgToken();
   return {
-    launched: false,
-    token: null,
+    launched: Boolean(token),
+    token,
     symbol: "AMG",
     name: "Arc Money Glitch",
     buyUrl: amgBuyUrl(),
@@ -51,9 +52,10 @@ function emptyGlobal(source: GlobalRewards["source"], error?: string): GlobalRew
 }
 
 function emptyWallet(address: string, source: WalletRewards["source"], error?: string): WalletRewards {
+  const token = getAmgToken();
   return {
-    launched: false,
-    token: null,
+    launched: Boolean(token),
+    token,
     address,
     symbol: "AMG",
     buyUrl: amgBuyUrl(),

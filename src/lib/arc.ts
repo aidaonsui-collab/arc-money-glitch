@@ -34,14 +34,15 @@ const BARACAT = "https://arc-mainnet-rpc.baracat.meme";
 const THELEAK = "https://ac-rpc.theleak.cx";
 
 export const ARC_RPC_URLS: string[] = (() => {
-  const primary = env("ARC_RPC") || env("VITE_ARC_RPC") || BARACAT;
+  // theleak first: baracat 502s under load; Infura needs a keyed URL.
+  const primary = env("ARC_RPC") || env("VITE_ARC_RPC") || THELEAK;
   const extras = (env("VITE_ARC_RPC_FALLBACKS") || "")
     .split(",")
     .map((s) => s.trim())
     .filter(Boolean);
   const seen = new Set<string>();
   const out: string[] = [];
-  for (const u of [primary, ...extras, BARACAT, INFURA_RPC, THELEAK]) {
+  for (const u of [primary, ...extras, THELEAK, BARACAT, INFURA_RPC]) {
     if (!u || isBanned(u) || seen.has(u)) continue;
     seen.add(u);
     out.push(u);
