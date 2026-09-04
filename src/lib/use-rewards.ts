@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import type { GlobalRewards, WalletRewards } from "./rewards-types";
 
 async function getJson<T>(url: string): Promise<T> {
-  const res = await fetch(url, { cache: "no-store" });
+  const res = await fetch(url);
   if (!res.ok) {
     const text = await res.text().catch(() => "");
     throw new Error(text || `Request failed (${res.status})`);
@@ -10,7 +10,7 @@ async function getJson<T>(url: string): Promise<T> {
   return (await res.json()) as T;
 }
 
-export function useGlobalRewards(pollMs = 20_000) {
+export function useGlobalRewards(pollMs = 60_000) {
   const [data, setData] = useState<GlobalRewards | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -41,7 +41,7 @@ export function useGlobalRewards(pollMs = 20_000) {
   return { data, error, loading };
 }
 
-export function useWalletRewards(address: string | null, pollMs = 15_000) {
+export function useWalletRewards(address: string | null, pollMs = 60_000) {
   const [data, setData] = useState<WalletRewards | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(Boolean(address));

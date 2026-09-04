@@ -94,8 +94,8 @@ const mem = globalThis as typeof globalThis & {
   __amgWalletCache__?: Map<string, { at: number; data: WalletRewards }>;
 };
 
-const GLOBAL_TTL_MS = 12_000;
-const WALLET_TTL_MS = 10_000;
+const GLOBAL_TTL_MS = 45_000;
+const WALLET_TTL_MS = 45_000;
 
 async function persistGlobal(data: GlobalRewards) {
   try {

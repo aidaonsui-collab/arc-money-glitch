@@ -9,7 +9,7 @@ export const Route = createFileRoute("/api/rewards/")({
           const data = await fetchGlobalRewards();
           return Response.json(data, {
             headers: {
-              "Cache-Control": "public, s-maxage=10, stale-while-revalidate=30",
+              "Cache-Control": "public, s-maxage=45, stale-while-revalidate=120",
             },
           });
         } catch (err) {

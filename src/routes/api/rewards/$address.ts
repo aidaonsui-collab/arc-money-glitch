@@ -14,7 +14,7 @@ export const Route = createFileRoute("/api/rewards/$address")({
           const data = await fetchWalletRewards(address);
           return Response.json(data, {
             headers: {
-              "Cache-Control": "public, s-maxage=8, stale-while-revalidate=20",
+              "Cache-Control": "public, s-maxage=45, stale-while-revalidate=120",
             },
           });
         } catch (err) {
