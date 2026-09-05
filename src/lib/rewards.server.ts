@@ -83,6 +83,12 @@ function arcClient(): PublicClient {
       urls.length > 1
         ? fallback(
             urls.map((u) => http(u, { retryCount: 0, timeout: 4_000 })),
+            // Without this, fallback() retries the WHOLE chain 3x by default (viem's generic
+            // transport default), so every candidate failing means ~4x the wall-clock time to
+            // finally error out. One pass through the list is enough — Promise.all in
+            // fetchGlobalRewards/fetchWalletRewards already runs several of these concurrently,
+            // so a slow failure here multiplies fast.
+            { retryCount: 0 },
           )
         : http(urls[0], { timeout: 4_000 }),
   });

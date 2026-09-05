@@ -32,17 +32,23 @@ const INFURA_RPC = INFURA_KEY
 
 const BARACAT = "https://arc-mainnet-rpc.baracat.meme";
 const THELEAK = "https://ac-rpc.theleak.cx";
+const ARCSCAN = "https://rpc.arc-scan.org";
 
 export const ARC_RPC_URLS: string[] = (() => {
-  // theleak first: baracat 502s under load; Infura needs a keyed URL.
-  const primary = env("ARC_RPC") || env("VITE_ARC_RPC") || THELEAK;
+  // arc-scan first. Confirmed live 2026-09-05: this was the actual cause of /api/rewards
+  // returning "—" (empty) on the home page — theleak was answering plain eth_chainId calls with
+  // a malformed-looking "client packet length exceeds 255 buffer" 409, baracat was 502ing, and
+  // this list had neither arc-scan (healthy) nor any other working endpoint to fall through to.
+  // The site didn't hang forever, but the fallback chain exhausting both dead options took long
+  // enough that the dashboard's fetch effectively never resolved in the user's session.
+  const primary = env("ARC_RPC") || env("VITE_ARC_RPC") || ARCSCAN;
   const extras = (env("VITE_ARC_RPC_FALLBACKS") || "")
     .split(",")
     .map((s) => s.trim())
     .filter(Boolean);
   const seen = new Set<string>();
   const out: string[] = [];
-  for (const u of [primary, ...extras, THELEAK, BARACAT, INFURA_RPC]) {
+  for (const u of [primary, ...extras, ARCSCAN, THELEAK, BARACAT, INFURA_RPC]) {
     if (!u || isBanned(u) || seen.has(u)) continue;
     seen.add(u);
     out.push(u);
